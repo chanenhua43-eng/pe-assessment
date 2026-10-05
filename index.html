@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>高品質體育課程教學想像與診斷</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-800 min-h-screen py-8 px-4">
+  <div class="max-w-3xl mx-auto">
+    <!-- Header -->
+    <header class="text-center mb-8">
+      <h1 class="text-3xl font-bold text-slate-900 mb-2">高品質體育課程教學想像診斷</h1>
+      <p class="text-slate-600">透過 6 個真實課堂情境，評估您的教學信念落點，並獲得適性化的理論依據與改進策略</p>
+    </header>
+
+    <!-- Quiz Card Container -->
+    <div id="quiz-card" class="bg-white rounded-2xl shadow-xl p-6 md:p-8 border border-slate-100">
+      <!-- Dynamic Content rendered by JS -->
+    </div>
+  </div>
+
+  <script>
+    const quizData = [
+      {
+        id: 1,
+        title: "情境一：課堂說明與動作示範 (ALT-PE)",
+        scenario: "今天要教授「排球低手傳球/過網」的核心技巧，面對 40 分鐘的課堂時間安排與說明：",
+        options: [
+          { text: "(A) 講授與示範約 15 分鐘，之後全班兩兩一組輪流排隊練習，確保動作規範標準。", score: 1 },
+          { text: "(B) 提煉出 2–3 個關鍵提示詞（Key Cues），控制說明在 5–8 分鐘內，搭配多組球網/器材，確保學生練習時間（ALT-PE）達 50% 以上，並進行針對性回饋。", score: 3 },
+          { text: "(C) 不做過多動作示範，直接讓學生分組進行比賽，讓他們在比賽中自然摸索傳球方法。", score: 2 }
+        ],
+        theory: "體育有效教學理論 (ALT-PE, Siedentop & Tannehill)",
+        idealOption: 1, // Index of B
+        advice: {
+          low: "建議將講課時間精簡（KISS 原則），設計 2-3 個簡單關鍵詞，並增加器材組數（如多組球網），讓學生有至少 50% 以上的時間在「成功率高且適度挑戰」的情境下動手練習。",
+          high: "您具備極佳的有效教學概念！未來可進一步採用「專一且具體的資訊回饋」（如：『很好，剛剛擊球時手臂有打直！』）來強化動作記憶。"
+        }
+      },
+      {
+        id: 2,
+        title: "情境二：教學活動設計與情境連結 (Contextualized Learning)",
+        scenario: "在設計籃球「運球突破」的單元活動時，您會如何規劃練習活動？",
+        options: [
+          { text: "(A) 規劃直線錐桶運球、S 型繞錐運球等固定軌跡的重複性動作練習，達到熟能生巧。", score: 1 },
+          { text: "(B) 安排「1 對 1 半場突破」或「多對少過關」等帶有動態防守、需要觀察空間與做出決策的實戰擬真情境。", score: 3 },
+          { text: "(C) 直接進行標準全場 5 對 5 籃球比賽，讓學生在完整規則下體會運球時機。", score: 2 }
+        ],
+        theory: "情境學習理論與動態生態觀 (Situated Cognition & Perception-Action Coupling)",
+        idealOption: 1,
+        advice: {
+          low: "孤立的閉鎖式技能練習（如單純繞錐）難以遷移至實戰。建議在練習中引入「限制條件」（如加入動態防守者），讓學生訓練『觀察—決策—執行』的完整過程。",
+          high: "您的課堂極具情境感！可嘗試在練習暫停時加入『提問法』（如：剛才防守者留下什麼空間？），引導學生自我覺察策略。"
+        }
+      },
+      {
+        id: 3,
+        title: "情境三：學習目標與全人發展 (Whole-Child Development)",
+        scenario: "規劃一個為期六週的「田徑/跑跳技能」單元時，您的核心學習目標優先順序為何？",
+        options: [
+          { text: "(A) 以提升學生的跑速、跳遠距離與心肺耐力等「體適能與運動技術成績」為唯一核心。", score: 1 },
+          { text: "(B) 兼顧運動技能進步，同時透過分組合作培養「團隊溝通、策略討論、勝不驕敗不餒的情意態度與挫折忍受力」。", score: 3 },
+          { text: "(C) 以讓學生感到快樂、抒發課業壓力、有充分活動量為主要目標。", score: 2 }
+        ],
+        theory: "個人與社會責任模式 (TPSR Model, Hellison) & 全人素養",
+        idealOption: 1,
+        advice: {
+          low: "運動不只是練身體或抒發壓力。建議將「情意與社會互動目標」顯性化（例如明確告知今日目標包含『隊友失誤時給予一次正向鼓勵』），發揮體育的全人價值。",
+          high: "您成功將體育課提升至全人育人層次！可試著引進『角色輪替制度』（紀錄員、策略教練、裁判），讓每位孩子在團隊中展現不同價值。"
+        }
+      },
+      {
+        id: 4,
+        title: "情境四：差異化教學與自主選擇 (Autonomy & Choice)",
+        scenario: "班上學生的運動能力差異極大（有些是校隊等級，有些連基本接球都有困難）：",
+        options: [
+          { text: "(A) 全班採用統一高度的球網與標準球，並以統一評量標準要求所有學生完成。", score: 1 },
+          { text: "(B) 依能力強弱直接幫學生指定組別與指定難度的練習內容。", score: 2 },
+          { text: "(C) 提供「階梯式任務卡」（如：不同重量/彈性的球、不同高度的網），引導學生評估自身能力後自主選擇適合自己的挑戰難度。", score: 3 }
+        ],
+        theory: "自我決定論 (Self-Determination Theory - Autonomy & Competence)",
+        idealOption: 2, // Index of C
+        advice: {
+          low: "統一標準容易讓弱者挫折、強者無聊。建議設計 2-3 種難度的『階梯任務』，並教導學生自我評估（如：『連續成功 5 次可升級』），建立自主選擇權。",
+          high: "您給予了學生極佳的自主權與勝任感！下一步可引導學生嘗試「自訂目標」，讓他們學習對自己的學習成果負責。"
+        }
+      },
+      {
+        id: 5,
+        title: "情境五：課程單元的終極目標 (Physical Literacy)",
+        scenario: "當一個單元（如羽球或游泳）結束時，您最希望學生帶走的是什麼？",
+        options: [
+          { text: "(A) 掌握精準的發球與殺球技術，並獲得高分的期末測驗成績。", score: 1 },
+          { text: "(B) 具備運動知識與技能，並能主動安排課餘時間運動、評估社區運動資源，形成終身參與運動的習慣與自信。", score: 3 },
+          { text: "(C) 了解該運動項目的比賽規則與國際知名賽事歷史。", score: 2 }
+        ],
+        theory: "身體素養架構 (Physical Literacy Framework, Whitehead)",
+        idealOption: 1,
+        advice: {
+          low: "技術測驗不代表終身運動。建議在單元末安排『課外延伸任務』（如：調查學校周邊羽球場預約方式、設計個人一週運動計畫），連結課外真實生活。",
+          high: "您落實了身體素養的終極關懷！可進一步鼓勵學生將課堂學習轉化為「自主運動日誌」，養成自我健康管理習慣。"
+        }
+      },
+      {
+        id: 6,
+        title: "情境六：教學法與課程模式的運用 (Curriculum Models)",
+        scenario: "面對不同特質的班級或不同的學習主題時，您的課堂組織與教學風格為何？",
+        options: [
+          { text: "(A) 習慣採用統一的「直接教學法」（講授→示範→練習→測驗），確保課堂秩序與效率。", score: 1 },
+          { text: "(B) 根據目標彈性切換或結合多元模式（如：戰術遊戲法 TGFU、運動教育模式 SEM、TPSR 等）。", score: 3 },
+          { text: "(C) 採用完全開放的「自由活動模式」，由學生自行決定每節課要打什麼球。", score: 1 }
+        ],
+        theory: "模式導向體育教學 (Model-Based Instruction, Metzler)",
+        idealOption: 1,
+        advice: {
+          low: "單一教學法容易讓課程產生疲乏。建議嘗試『戰術遊戲法 (TGFU)』（先透過簡化遊戲引發問題，再教技術），能大幅提昇學生的動機與戰術理解。",
+          high: "您具備豐富的多元教學模組概念！可嘗試結合『運動教育模式 (SEM)』設計 6 週賽季，建立高凝聚力的班級運動文化。"
+        }
+      }
+    ];
+
+    let userAnswers = Array(quizData.length).fill(null);
+    let currentStep = 0;
+
+    function renderQuiz() {
+      const card = document.getElementById("quiz-card");
+      const current = quizData[currentStep];
+
+      let optionsHTML = current.options.map((opt, idx) => `
+        <label class="block p-4 mb-3 border-2 rounded-xl cursor-pointer transition-all ${userAnswers[currentStep] === idx ? 'border-indigo-600 bg-indigo-50/50' : 'border-slate-200 hover:border-slate-300'}">
+          <div class="flex items-start">
+            <input type="radio" name="option" value="${idx}" ${userAnswers[currentStep] === idx ? 'checked' : ''} onchange="selectOption(${idx})" class="mt-1 text-indigo-600 focus:ring-indigo-500">
+            <span class="ml-3 text-slate-700">${opt.text}</span>
+          </div>
+        </label>
+      `).join('');
+
+      card.innerHTML = `
+        <div class="flex justify-between items-center mb-4 text-sm font-medium text-slate-500">
+          <span>情境 ${currentStep + 1} / ${quizData.length}</span>
+          <span>進度 ${Math.round(((currentStep + 1) / quizData.length) * 100)}%</span>
+        </div>
+        <div class="w-full bg-slate-100 rounded-full h-2 mb-6">
+          <div class="bg-indigo-600 h-2 rounded-full transition-all duration-300" style="width: ${((currentStep + 1) / quizData.length) * 100}%"></div>
+        </div>
+
+        <h2 class="text-xl font-bold text-slate-900 mb-3">${current.title}</h2>
+        <p class="text-slate-600 mb-6 bg-slate-50 p-4 rounded-lg border-l-4 border-indigo-500">${current.scenario}</p>
+
+        <div class="mb-8">${optionsHTML}</div>
+
+        <div class="flex justify-between">
+          <button onclick="prevStep()" ${currentStep === 0 ? 'disabled class="opacity-0 pointer-events-none"' : ''} class="px-5 py-2.5 rounded-lg border border-slate-300 text-slate-600 font-medium hover:bg-slate-50">上一題</button>
+          <button onclick="nextStep()" ${userAnswers[currentStep] === null ? 'disabled class="opacity-50 cursor-not-allowed bg-indigo-600 text-white px-6 py-2.5 rounded-lg font-medium"' : 'class="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-2.5 rounded-lg font-medium shadow-md shadow-indigo-200"'}>
+            ${currentStep === quizData.length - 1 ? '查看診斷報告' : '下一題'}
+          </button>
+        </div>
+      `;
+    }
+
+    function selectOption(idx) {
+      userAnswers[currentStep] = idx;
+      renderQuiz();
+    }
+
+    function prevStep() {
+      if (currentStep > 0) { currentStep--; renderQuiz(); }
+    }
+
+    function nextStep() {
+      if (currentStep < quizData.length - 1) {
+        currentStep++;
+        renderQuiz();
+      } else {
+        renderResult();
+      }
+    }
+
+    function renderResult() {
+      const card = document.getElementById("quiz-card");
+      let totalScore = userAnswers.reduce((sum, optIdx, qIdx) => sum + quizData[qIdx].options[optIdx].score, 0);
+      let maxScore = quizData.length * 3;
+      let percentage = Math.round((totalScore / maxScore) * 100);
+
+      let reportDetails = quizData.map((q, idx) => {
+        let chosenIdx = userAnswers[idx];
+        let isIdeal = chosenIdx === q.idealOption;
+        let adviceText = isIdeal ? q.advice.high : q.advice.low;
+
+        return `
+          <div class="mb-6 p-5 rounded-xl border ${isIdeal ? 'border-emerald-200 bg-emerald-50/30' : 'border-amber-200 bg-amber-50/30'}">
+            <div class="flex items-center justify-between mb-2">
+              <h4 class="font-bold text-slate-800">${q.title}</h4>
+              <span class="text-xs px-2.5 py-1 rounded-full font-semibold ${isIdeal ? 'bg-emerald-100 text-emerald-800' : 'bg-amber-100 text-amber-800'}">
+                ${isIdeal ? '素養導向型' : '可優化調整'}
+              </span>
+            </div>
+            <p class="text-xs text-indigo-700 font-medium mb-3">📚 理論依據：${q.theory}</p>
+            <p class="text-sm text-slate-600 mb-3"><strong>您的選擇：</strong>${q.options[chosenIdx].text}</p>
+            <div class="text-sm bg-white p-3.5 rounded-lg border border-slate-200/80 text-slate-700">
+              <strong class="text-slate-900 block mb-1">💡 具體行動與優化策略：</strong>
+              ${adviceText}
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      card.innerHTML = `
+        <div class="text-center mb-8">
+          <div class="inline-block p-4 rounded-full bg-indigo-50 mb-3">
+            <span class="text-4xl font-extrabold text-indigo-600">${percentage}</span>
+            <span class="text-sm font-semibold text-indigo-400">/ 100 分</span>
+          </div>
+          <h2 class="text-2xl font-bold text-slate-900">高品質體育教學想像報告</h2>
+          <p class="text-slate-600 mt-1">您目前的教學想像落點為：<strong>${percentage >= 80 ? '前瞻素養導向型 🚀' : percentage >= 60 ? '轉型成長型 🌱' : '傳統奠基型 📘'}</strong></p>
+        </div>
+
+        <h3 class="text-lg font-bold text-slate-900 mb-4 border-b pb-2">各情境深度診斷與行動指引</h3>
+        ${reportDetails}
+
+        <div class="text-center mt-8">
+          <button onclick="restartQuiz()" class="bg-slate-800 hover:bg-slate-900 text-white px-8 py-3 rounded-xl font-medium shadow-md">重新進行診斷</button>
+        </div>
+      `;
+    }
+
+    function restartQuiz() {
+      userAnswers = Array(quizData.length).fill(null);
+      currentStep = 0;
+      renderQuiz();
+    }
+
+    // Initialize
+    renderQuiz();
+  </script>
+</body>
+</html>
