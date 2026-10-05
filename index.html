@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>體育課堂真實情境診斷量表</title>
+  <title>高中體育課堂真實情境診斷量表 (50分鐘版)</title>
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
@@ -14,8 +14,8 @@
   <div class="max-w-3xl mx-auto">
     <!-- Header -->
     <header class="text-center mb-8">
-      <h1 class="text-3xl font-bold text-slate-900 mb-2">體育課堂真實情境診斷量表</h1>
-      <p class="text-slate-600">透過 6 個真實課堂決策情境，評估您的教學信念落點與後續優化策略</p>
+      <h1 class="text-3xl font-bold text-slate-900 mb-2">高中體育課堂真實情境診斷量表</h1>
+      <p class="text-slate-600">透過 6 個高中體育課（50分鐘）真實決策情境，評估您的教學信念落點與後續優化策略</p>
     </header>
 
     <!-- Quiz Card Container -->
@@ -28,19 +28,19 @@
     const quizData = [
       {
         id: 1,
-        title: "情境一：課堂說明與動作示範 (教學時間配置)",
-        scenario: "今天教授排球「低手傳球」，課堂時間只有 40 分鐘，學生剛集合完畢。在準備介紹動作要領時，您最常採取的課堂節奏是？",
+        title: "情境一：課堂說明與動作示範 (時間配置與 ALT-PE)",
+        scenario: "今天教授排球「低手傳球」，高中課堂時間共 50 分鐘，學生剛集合完畢。在準備介紹動作要領時，您最常採取的課堂節奏是？",
         options: [
-          { text: "(A) 講精、練熟：花 10–15 分鐘完整講解並示範動作要領與常犯錯誤，確保全班建立正確動作概念後，再分組排隊練習。", type: "direct", score: 1 },
-          { text: "(B) 精簡、多動：只用 2–3 分鐘示範並交代 2 個核心動作口訣，迅速將全班散開到多個球網或牆面，讓學生邊練邊聽個別指導。", type: "literacy", score: 3 },
+          { text: "(A) 講精、練熟：花 12–15 分鐘完整講解與示範動作要領及常犯錯誤，確保全班建立正確動作概念後，再分組排隊練習。", type: "direct", score: 1 },
+          { text: "(B) 精簡、多動：只用 3–5 分鐘交代 2 個核心動作口訣並示範，迅速將全班散開至多個球網練習，確保練習時間達 25 分鐘 (50%) 以上，邊練邊個別指導。", type: "literacy", score: 3 },
           { text: "(C) 探索、後總結：先不示範標準動作，直接發球給學生分組嘗試「把球連續過網 3 次」，等學生發現問題後，再集合進行動作教學。", type: "construct", score: 2 }
         ],
         element: "1. 建立在有效教學的基礎上",
         theory: "體育有效教學理論 (ALT-PE, Siedentop & Tannehill)",
         idealIdx: 1,
         advices: {
-          direct: "講解過長容易吞噬學生的有效練習時間（ALT-PE）。建議採用 KISS 原則（單次講解不超過 2 分鐘），並增加器材組數（如多組球網），讓學生有 50% 以上的時間在動手練習。",
-          construct: "探索式教學能激發興趣，但若缺乏基礎鷹架，學生容易形成錯誤動作習慣。建議在探索前給予 1–2 個關鍵提示詞（Key Cues），引導有效探索。",
+          direct: "在 50 分鐘的課堂中，講解超過 10 分鐘容易吞噬學生的有效練習時間（ALT-PE）。建議採用 KISS 原則（單次講解控制在 3-5 分鐘內），並增加器材組數（如多組球網），讓學生有 25 分鐘 (50%) 以上的時間在動手練習。",
+          construct: "探索式教學能激發興趣，但若缺乏基礎鷹架，高中學生容易形成錯誤動作習慣。建議在探索前給予 1–2 個關鍵提示詞（Key Cues），引導有效探索。",
           literacy: "您具備極佳的高 ALT-PE 有效教學概念！建議未來練習時，可搭配『專一且具體的資訊回饋』（如：『很好，剛剛擊球時手臂有打直！』）來強化動作記憶。"
         }
       },
@@ -82,7 +82,7 @@
       },
       {
         id: 4,
-        title: "情境四：差異化教學與任務設定 (學生能力落差)",
+        title: "情境四：差異化教學與任務設定 (能力落差)",
         scenario: "班上學生的運動能力落差極大，面對「有些學生已經會打，有些連球都接不到」的狀況，您的標準作法是？",
         options: [
           { text: "(A) 統一標準與規範：設定全班統一的球網高度與測驗門檻，引導能力較弱的學生努力達到基本標準。", type: "direct", score: 1 },
@@ -101,7 +101,7 @@
       {
         id: 5,
         title: "情境五：單元結束的學習期待 (身體素養遷移)",
-        scenario: "一個為期 6 周的羽球單元進入尾聲，您最希望學生離開這門課後能帶走什麼？",
+        scenario: "一個為期 6 週的羽球單元進入尾聲，您最希望學生離開這門課後帶走什麼？",
         options: [
           { text: "(A) 標準動作與測驗成績：能掌握精準的發球與擊球動作技術，並在期末測驗中取得優異成績。", type: "direct", score: 1 },
           { text: "(B) 運動習慣與生活連結：不僅懂技術與規則，還能主動了解社區球場資源、建立與同伴在課餘時間約打球的興趣與習慣。", type: "literacy", score: 3 },
@@ -122,7 +122,7 @@
         scenario: "面對不同特質的班級，您在設計整堂課的架構與引導方式時，通常偏向哪種風格？",
         options: [
           { text: "(A) 結構化直接教學：採取「教師示範 → 統一帶領練習 → 巡迴修正 → 單元測驗」的系統化教學流程，確保秩序與學習效率。", type: "direct", score: 1 },
-          { text: "(B) 模组化多元教學：依單元特性彈性採用不同模式（如：球類項目用「戰術遊戲法 TGFU」、團體單元用「運動教育模式 SEM」）。", type: "literacy", score: 3 },
+          { text: "(B) 模組化多元教學：依單元特性彈性採用不同模式（如：球類項目用「戰術遊戲法 TGFU」、團體單元用「運動教育模式 SEM」）。", type: "literacy", score: 3 },
           { text: "(C) 自由探索與自主活動：提供多樣運動器材，由學生自行決定每節課要從事何種活動，教師主要扮演安全維護與秩序維護者。", type: "construct", score: 2 }
         ],
         element: "6. 使用不同的課程模式與教學法",
@@ -231,7 +231,7 @@
               <strong>您的課堂決策：</strong>${chosenOpt.text}
             </p>
             <div class="text-sm bg-white p-3.5 rounded-lg border border-slate-200/80 text-slate-700 leading-relaxed">
-              <strong class="text-slate-900 block mb-1">💡 實務優化與行動指引：</strong>
+              <strong class="text-slate-900 block mb-1">💡 高中課堂優化與行動指引：</strong>
               ${adviceText}
             </div>
           </div>
@@ -240,7 +240,7 @@
 
       card.innerHTML = `
         <div class="text-center mb-8">
-          <h2 class="text-2xl font-bold text-slate-900 mb-2">高品質體育教學想像報告</h2>
+          <h2 class="text-2xl font-bold text-slate-900 mb-2">高中體育教學想像報告 (50分鐘)</h2>
           <p class="text-slate-600 mb-4">您的主導教學信念風格為：<span class="font-bold text-indigo-600">${mainStyle}</span></p>
 
           <!-- Belief Spectrum Bar -->
