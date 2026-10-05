@@ -8,6 +8,24 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; }
+    /* 確保動態條的高度與顯色穩定 */
+    .spectrum-bar-container {
+      display: flex;
+      height: 24px;
+      width: 100%;
+      border-radius: 9999px;
+      overflow: hidden;
+      background-color: #e2e8f0;
+    }
+    .spectrum-item {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-weight: 700;
+      color: #ffffff;
+      transition: width 0.5s ease-in-out;
+    }
   </style>
 </head>
 <body class="bg-slate-50 text-slate-800 min-h-screen py-8 px-4">
@@ -198,11 +216,13 @@
     function renderResult() {
       const card = document.getElementById("quiz-card");
 
-      // Calculate styles count
+      // 計算各類型次數
       let counts = { direct: 0, construct: 0, literacy: 0 };
       userAnswers.forEach((chosenIdx, qIdx) => {
-        let type = quizData[qIdx].options[chosenIdx].type;
-        counts[type]++;
+        if (chosenIdx !== null) {
+          let type = quizData[qIdx].options[chosenIdx].type;
+          counts[type]++;
+        }
       });
 
       let total = quizData.length;
@@ -241,20 +261,22 @@
       card.innerHTML = `
         <div class="text-center mb-8">
           <h2 class="text-2xl font-bold text-slate-900 mb-2">高中體育教學想像報告 (50分鐘)</h2>
-          <p class="text-slate-600 mb-4">您的主導教學信念風格為：<span class="font-bold text-indigo-600">${mainStyle}</span></p>
+          <p class="text-slate-600 mb-6">您的主導教學信念風格為：<span class="font-bold text-indigo-600">${mainStyle}</span></p>
 
-          <!-- Belief Spectrum Bar -->
-          <div class="bg-slate-100 p-4 rounded-xl max-w-lg mx-auto text-left mb-4">
-            <div class="text-xs font-semibold text-slate-500 mb-2">教學信念傾向比例：</div>
-            <div class="flex h-4 rounded-full overflow-hidden mb-2 text-[10px] text-white text-center font-bold">
-              <div style="width: ${literacyPct}%" class="bg-indigo-600 flex items-center justify-center" title="素養導向">${literacyPct > 15 ? literacyPct + '%' : ''}</div>
-              <div style="width: ${constructPct}%" class="bg-amber-500 flex items-center justify-center" title="建構探索">${constructPct > 15 ? constructPct + '%' : ''}</div>
-              <div style="width: ${directPct}%" class="bg-slate-400 flex items-center justify-center" title="結構奠基">${directPct > 15 ? directPct + '%' : ''}</div>
+          <!-- 修復後的視覺化傾向條 -->
+          <div class="bg-slate-100 p-5 rounded-2xl max-w-lg mx-auto text-left mb-6 border border-slate-200">
+            <div class="text-xs font-bold text-slate-600 mb-3 uppercase tracking-wider">教學信念傾向比例視覺化：</div>
+            
+            <div class="spectrum-bar-container mb-3 shadow-inner">
+              ${literacyPct > 0 ? `<div class="spectrum-item bg-indigo-600" style="width: ${literacyPct}\%;">${literacyPct}%</div>` : ''}
+              ${constructPct > 0 ? `<div class="spectrum-item bg-amber-500" style="width: ${constructPct}\%;">${constructPct}%</div>` : ''}
+              ${directPct > 0 ? `<div class="spectrum-item bg-slate-400" style="width: ${directPct}\%;">${directPct}%</div>` : ''}
             </div>
-            <div class="flex justify-between text-xs text-slate-600">
-              <span class="flex items-center"><span class="w-2.5 h-2.5 rounded-full bg-indigo-600 inline-block mr-1"></span>素養導向 (${literacyPct}%)</span>
-              <span class="flex items-center"><span class="w-2.5 h-2.5 rounded-full bg-amber-500 inline-block mr-1"></span>建構探索 (${constructPct}%)</span>
-              <span class="flex items-center"><span class="w-2.5 h-2.5 rounded-full bg-slate-400 inline-block mr-1"></span>結構奠基 (${directPct}%)</span>
+
+            <div class="flex justify-between items-center text-xs text-slate-700 font-medium pt-1">
+              <span class="flex items-center"><span class="w-3 h-3 rounded-full bg-indigo-600 inline-block mr-1.5 shadow-sm"></span>素養導向 (${literacyPct}%)</span>
+              <span class="flex items-center"><span class="w-3 h-3 rounded-full bg-amber-500 inline-block mr-1.5 shadow-sm"></span>建構探索 (${constructPct}%)</span>
+              <span class="flex items-center"><span class="w-3 h-3 rounded-full bg-slate-400 inline-block mr-1.5 shadow-sm"></span>結構奠基 (${directPct}%)</span>
             </div>
           </div>
         </div>
