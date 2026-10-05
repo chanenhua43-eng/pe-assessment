@@ -6,27 +6,6 @@
   <title>高中體育課堂真實情境診斷量表 (50分鐘版)</title>
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <style>
-    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; }
-    /* 確保動態條的高度與顯色穩定 */
-    .spectrum-bar-container {
-      display: flex;
-      height: 24px;
-      width: 100%;
-      border-radius: 9999px;
-      overflow: hidden;
-      background-color: #e2e8f0;
-    }
-    .spectrum-item {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 11px;
-      font-weight: 700;
-      color: #ffffff;
-      transition: width 0.5s ease-in-out;
-    }
-  </style>
 </head>
 <body class="bg-slate-50 text-slate-800 min-h-screen py-8 px-4">
   <div class="max-w-3xl mx-auto">
@@ -47,7 +26,7 @@
       {
         id: 1,
         title: "情境一：課堂說明與動作示範 (時間配置與 ALT-PE)",
-        scenario: "今天教授排球「低手傳球」，高中課堂時間共 50 分鐘，學生剛集合完畢。在準備介紹動作要領時，您最常採取的課堂節奏是？",
+        scenario: "今天要教授排球「低手傳球」，高中課堂時間共 50 分鐘，學生剛集合完畢。在準備介紹動作要領時，您最常採取的課堂節奏是？",
         options: [
           { text: "(A) 講精、練熟：花 12–15 分鐘完整講解與示範動作要領及常犯錯誤，確保全班建立正確動作概念後，再分組排隊練習。", type: "direct", score: 1 },
           { text: "(B) 精簡、多動：只用 3–5 分鐘交代 2 個核心動作口訣並示範，迅速將全班散開至多個球網練習，確保練習時間達 25 分鐘 (50%) 以上，邊練邊個別指導。", type: "literacy", score: 3 },
@@ -57,7 +36,7 @@
         theory: "體育有效教學理論 (ALT-PE, Siedentop & Tannehill)",
         idealIdx: 1,
         advices: {
-          direct: "在 50 分鐘的課堂中，講解超過 10 分鐘容易吞噬學生的有效練習時間（ALT-PE）。建議採用 KISS 原則（單次講解控制在 3-5 分鐘內），並增加器材組數（如多組球網），讓學生有 25 分鐘 (50%) 以上的時間在動手練習。",
+          direct: "在 50 分鐘的高中課堂中，講解超過 10 分鐘容易吞噬學生的有效練習時間（ALT-PE）。建議採用 KISS 原則（單次講解控制在 3-5 分鐘內），並增加器材組數（如多組球網），讓學生有 25 分鐘 (50%) 以上的時間在動手練習。",
           construct: "探索式教學能激發興趣，但若缺乏基礎鷹架，高中學生容易形成錯誤動作習慣。建議在探索前給予 1–2 個關鍵提示詞（Key Cues），引導有效探索。",
           literacy: "您具備極佳的高 ALT-PE 有效教學概念！建議未來練習時，可搭配『專一且具體的資訊回饋』（如：『很好，剛剛擊球時手臂有打直！』）來強化動作記憶。"
         }
@@ -258,20 +237,25 @@
         `;
       }).join('');
 
+      // 產生純 HTML + Inline CSS 視覺化長條
+      let barHTML = `
+        <div style="display: flex; height: 28px; width: 100%; border-radius: 14px; overflow: hidden; background-color: #e2e8f0; margin-bottom: 12px; box-shadow: inset 0 2px 4px rgba(0,0,0,0.06);">
+          ${literacyPct > 0 ? `<div style="width: ${literacyPct}\%; background-color: #4f46e5; display: flex; align-items: center; justify-content: center; color: white; font-size: 12px; font-weight: bold;">${literacyPct}%</div>` : ''}
+          ${constructPct > 0 ? `<div style="width: ${constructPct}\%; background-color: #f59e0b; display: flex; align-items: center; justify-content: center; color: white; font-size: 12px; font-weight: bold;">${constructPct}%</div>` : ''}
+          ${directPct > 0 ? `<div style="width: ${directPct}\%; background-color: #94a3b8; display: flex; align-items: center; justify-content: center; color: white; font-size: 12px; font-weight: bold;">${directPct}%</div>` : ''}
+        </div>
+      `;
+
       card.innerHTML = `
         <div class="text-center mb-8">
           <h2 class="text-2xl font-bold text-slate-900 mb-2">高中體育教學想像報告 (50分鐘)</h2>
           <p class="text-slate-600 mb-6">您的主導教學信念風格為：<span class="font-bold text-indigo-600">${mainStyle}</span></p>
 
-          <!-- 修復後的視覺化傾向條 -->
+          <!-- 視覺化傾向條區塊 -->
           <div class="bg-slate-100 p-5 rounded-2xl max-w-lg mx-auto text-left mb-6 border border-slate-200">
             <div class="text-xs font-bold text-slate-600 mb-3 uppercase tracking-wider">教學信念傾向比例視覺化：</div>
             
-            <div class="spectrum-bar-container mb-3 shadow-inner">
-              ${literacyPct > 0 ? `<div class="spectrum-item bg-indigo-600" style="width: ${literacyPct}\%;">${literacyPct}%</div>` : ''}
-              ${constructPct > 0 ? `<div class="spectrum-item bg-amber-500" style="width: ${constructPct}\%;">${constructPct}%</div>` : ''}
-              ${directPct > 0 ? `<div class="spectrum-item bg-slate-400" style="width: ${directPct}\%;">${directPct}%</div>` : ''}
-            </div>
+            ${barHTML}
 
             <div class="flex justify-between items-center text-xs text-slate-700 font-medium pt-1">
               <span class="flex items-center"><span class="w-3 h-3 rounded-full bg-indigo-600 inline-block mr-1.5 shadow-sm"></span>素養導向 (${literacyPct}%)</span>
